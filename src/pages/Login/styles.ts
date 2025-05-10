@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 
-
-
 export const Container = styled.div`
     width: 100%; 
     height: 100vh;
@@ -49,3 +47,10 @@ export const Column = styled.div`
 export const Spacing = styled.div`
     margin: 10px 0;
 `
+
+export const ErrorText = styled.p`
+    color: red;
+    font-size: 12px;
+    font-weight: bold;
+    margin: 10px;
+`;

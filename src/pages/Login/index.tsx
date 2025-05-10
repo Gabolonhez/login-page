@@ -3,8 +3,10 @@ import Button from "../../components/Button";
 import Input from "../../components/Input";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup"; 
-import { Container, LoginContainer, Column, Spacing, Title } from "./styles";
+import { Container, LoginContainer, Column, Spacing, Title, ErrorText } from "./styles";
 import { defaultValues, IFormLogin } from "./types";
+import { useState } from "react";
+
 
 
 const schema = yup
@@ -17,26 +19,42 @@ const schema = yup
   })
   .required();
 
+const mockLogin = (email: string, password: string): boolean => {
+  return email === "gbf@gmail.com" && password === "12345678";
+}
+
 const Login = () => {
     useForm();
+    const [loginError, setLoginError] = useState("");
 
   const {
     control,
-    formState: { errors, isValid },
-   
+    handleSubmit,
+    formState: { errors, isValid }
   } = useForm<IFormLogin>({
-   
     resolver: yupResolver(schema) as any,
     mode: "onBlur", 
     defaultValues, 
     reValidateMode: "onChange", 
   });
+
+  const onSubmit = (data: IFormLogin) => {
+    const success = mockLogin(data.email, data.password);
+    if (success) {
+      alert("Login realizado com sucesso");
+      setLoginError("");
+    } else {
+      setLoginError("E-mail ou senha inválidos");
+      
+    }
+  }
   return (
     <Container>
       <LoginContainer>
         <Column>
           <Title>Login</Title>
           <Spacing />
+          <form onSubmit={handleSubmit(onSubmit)}>
           <Input
             placeholder="E-mail" control={control} name="email"
             errorMessage={errors?.email?.message}
@@ -50,7 +68,9 @@ const Login = () => {
             errorMessage={errors?.password?.message}
           />
           <Spacing />
-          <Button title="Entrar" />
+          {loginError && <ErrorText>{loginError}</ErrorText>}
+          <Button title="Entrar"  disabled={!isValid} />
+          </form>
         </Column>
       </LoginContainer>
     </Container>
