@@ -1,3 +1,19 @@
+# Login page
+![image](https://github.com/user-attachments/assets/d1b61585-128c-4e27-9f63-f4a7ff1ed244)
+
+## 📑 Descrição
+Página de login.
+
+## 🎯 Funcionalidades
+- [X] : Validação de e-mail e senha.
+
+## 💻 Tecnologias
+- `React`
+- `Javascript`
+- `HTML`
+- `CSS`
+- `Typescript`
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
